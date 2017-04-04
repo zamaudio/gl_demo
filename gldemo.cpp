@@ -189,5 +189,6 @@ int main()
 
 	ctx.render_loop();
 
+	ctx.cleanup();
 	return 0;
 }
