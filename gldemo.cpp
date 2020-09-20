@@ -98,7 +98,7 @@ void GL_base::set_vertices(GLfloat vertex[], GLuint count)
 	vertex_count = count;
 }
 
-void GL_base::load_vertices()
+void GL_base::load_vertices(GLuint count)
 {
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
@@ -106,7 +106,7 @@ void GL_base::load_vertices()
 	glBindVertexArray(VAO);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, count * sizeof(GLfloat), vertices, GL_STATIC_DRAW);
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
 	glEnableVertexAttribArray(0);
@@ -185,7 +185,7 @@ int main()
 
 	ctx.init();
 	ctx.compile_shaders();
-	ctx.load_vertices();
+	ctx.load_vertices(9);
 
 	ctx.render_loop();
 
